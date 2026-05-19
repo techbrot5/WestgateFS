@@ -1,0 +1,342 @@
+/* =============================================================
+   WestgateFS — Homepage Refinements
+   Layered on top of global.css. Proportional tuning only.
+   ============================================================= */
+
+/* ---- 1. Hero — asymmetric proportions on wide screens ---- */
+
+@media (min-width: 1200px) {
+  .wfs-hero__grid {
+    --bs-gutter-x: 4rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .wfs-hero__col--copy {
+    padding-right: clamp(20px, 2vw, 40px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .wfs-hero__col--visual {
+    padding-left: clamp(20px, 2vw, 40px);
+  }
+}
+
+/* ---- 2. Hero illustration — premium composition ---- */
+
+.wfs-hero__illustration {
+  filter: drop-shadow(0 18px 40px rgba(26, 24, 20, 0.06));
+  transition: transform var(--t-slow) var(--ease-out);
+}
+
+.wfs-section.is-visible .wfs-hero__illustration {
+  transform: translateY(0);
+}
+
+/* ---- 3. Hero eyebrow — slightly elevated on home only ---- */
+
+.wfs-hero .wfs-eyebrow {
+  color: var(--ink-2);
+}
+
+/* ---- Services Grid Layout ---- */
+
+.wfs-services__grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  row-gap: 2rem;
+}
+
+/* Mobile: stacked */
+
+.wfs-services__grid > .wfs-pillar {
+  width: 100%;
+  max-width: 100%;
+  flex: 0 0 100%;
+}
+
+/* Desktop: 3 equal columns */
+
+@media (min-width: 992px) {
+  .wfs-services__grid > .wfs-pillar {
+    width: 33.3333%;
+    max-width: 33.3333%;
+    flex: 0 0 33.3333%;
+  }
+}
+
+/* Featured center elevation */
+
+@media (min-width: 992px) {
+  .wfs-services__grid > .wfs-pillar--featured {
+    transform: translateY(-10px);
+  }
+}
+
+/* ---- Pillar Card System ---- */
+
+.wfs-pillar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 2.75rem;
+  border-radius: 2rem;
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+}
+
+/* Premium hover */
+
+@media (hover: hover) {
+  .wfs-pillar:hover {
+    transform: translateY(-6px);
+    border-color: rgba(234, 88, 12, 0.18);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06);
+  }
+}
+
+@media (hover: hover) {
+  .wfs-pillar--featured:hover {
+    transform: translateY(-14px);
+  }
+}
+
+/* Featured pillar */
+
+.wfs-pillar--featured {
+  background: linear-gradient( to bottom, rgba(255, 247, 237, 0.9), rgba(255, 255, 255, 1) );
+  border-color: rgba(234, 88, 12, 0.14);
+}
+
+/* Internal layout */
+
+.wfs-pillar__list {
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+/* Icon sizing */
+
+.wfs-pillar__visual {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wfs-pillar__visual img {
+  width: 6rem;
+  height: 6rem;
+  object-fit: contain;
+}
+
+/* Better mobile spacing */
+
+@media (max-width: 991.98px) {
+  .wfs-pillar {
+    padding: 2rem;
+    border-radius: 1.5rem;
+  }
+}
+
+/* ---- 5. Pain — editorial weight on homepage ---- */
+
+.wfs-pain .wfs-pain__row {
+  transition: background-color var(--t-base) var(--ease);
+}
+
+@media (hover: hover) {
+  .wfs-pain .wfs-pain__row:hover {
+    background-color: rgba(255,255,255,0.4);
+  }
+}
+
+/* ---- 6. Pullquote — slightly heavier visual weight on home ---- */
+
+.wfs-pullquote {
+  background: linear-gradient(180deg, var(--paper-warm) 0%, var(--paper) 100%);
+}
+
+/* ---- 7. Approach — premium corner mark on founder figure ---- */
+
+.wfs-approach .wfs-approach__figure {
+  position: relative;
+}
+
+.wfs-approach .wfs-approach__figure::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 72px;
+  height: 72px;
+  border-top: 1px solid var(--brand);
+  border-right: 1px solid var(--brand);
+  border-top-right-radius: var(--r-xl);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* ---- 8. Featured proof — anchored elevation on wide screens ---- */
+
+@media (min-width: 1280px) {
+  .wfs-proof-featured__card {
+    padding: clamp(40px, 3.5vw, 72px);
+  }
+}
+
+@media (min-width: 1280px) {
+  .wfs-proof-featured__card:hover {
+    box-shadow: var(--shadow-xl);
+  }
+}
+
+/* ---- 9. Supporting proof — staggered visual rhythm ---- */
+
+@media (min-width: 992px) {
+  .wfs-proof-supporting .wfs-proof__card:nth-child(2) {
+    transform: translateY(16px);
+  }
+}
+
+/* ---- 10. Difference table — softer shadow on home ---- */
+
+.wfs-difference__table {
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---- 11. Industries — staggered hover lift ---- */
+
+@media (hover: hover) {
+  .wfs-industries .wfs-industry:hover {
+    box-shadow: var(--shadow-md);
+  }
+}
+
+/* ---- 12. Mission — wider copy column on home ---- */
+
+@media (min-width: 992px) {
+  .wfs-mission .wfs-mission__col--copy {
+    padding-right: clamp(20px, 3vw, 56px);
+  }
+}
+
+/* ---- 13. Locations — Conroe HQ accent stripe ---- */
+
+.wfs-locations .wfs-locations__address {
+  position: relative;
+}
+
+.wfs-locations .wfs-locations__address::before {
+  content: "";
+  position: absolute;
+  top: var(--sp-5);
+  left: -16px;
+  width: 3px;
+  height: calc(100% - var(--sp-5));
+  background: var(--sky);
+  border-radius: var(--r-pill);
+  opacity: 0.65;
+}
+
+@media (max-width: 991.98px) {
+  .wfs-locations .wfs-locations__address {
+    padding-left: var(--sp-4);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .wfs-locations .wfs-locations__address::before {
+    left: 0;
+  }
+}
+
+/* ---- 14. Process — connector line aligned to numbered circles ---- */
+
+@media (min-width: 992px) {
+  .wfs-process .wfs-process__steps {
+    position: relative;
+  }
+}
+
+@media (min-width: 992px) {
+  .wfs-process .wfs-process__steps::before {
+    content: "";
+    position: absolute;
+    top: 28px;
+    left: 8%;
+    right: 8%;
+    height: 1px;
+    background: var(--line-strong);
+    z-index: 0;
+  }
+}
+
+/* ---- 15. Stay — extra editorial breathing on home ---- */
+
+.wfs-stay {
+  padding-block: clamp(56px, 6vw, 96px);
+}
+
+/* ---- 16. Insight — visual pause band on home ---- */
+
+.wfs-insight {
+  background: linear-gradient(180deg, var(--paper) 0%, var(--paper-warm) 100%);
+}
+
+/* ---- 17. Reviews — featured center card slight scale on wide ---- */
+
+@media (min-width: 1200px) {
+  .wfs-reviews .wfs-review--featured {
+    transform: scale(1.025);
+  }
+}
+
+@media (min-width: 1200px) {
+  .wfs-reviews .wfs-review--featured:hover {
+    transform: scale(1.025) translateY(-2px);
+  }
+}
+
+/* ---- 18. FAQ — wider answer area on home ---- */
+
+.wfs-faq .wfs-faq__list {
+  margin-top: var(--sp-6);
+}
+
+/* ---- 19. Standards — visually larger badges on home ---- */
+
+.wfs-standards .wfs-standards__icon {
+  background: linear-gradient(180deg, var(--paper-warm) 0%, var(--brand-tint) 100%);
+}
+
+@media (min-width: 992px) {
+  .wfs-standards .wfs-standards__item {
+    grid-template-columns: 96px 1fr;
+    gap: var(--sp-8);
+  }
+}
+
+@media (min-width: 992px) {
+  .wfs-standards .wfs-standards__icon {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+@media (min-width: 992px) {
+  .wfs-standards .wfs-standards__icon img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ---- 20. Final CTA — soft sky + orange halo on home ---- */
+
+.wfs-section--cta {
+  background: radial-gradient(circle at 50% 0%, rgba(197, 106, 46, 0.05), transparent 55%), radial-gradient(circle at 50% 100%, rgba(60, 96, 136, 0.04), transparent 55%), var(--paper);
+}
+

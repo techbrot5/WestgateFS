@@ -1,0 +1,639 @@
+/* =============================================================
+   WestgateFS — Endpoints  v1.0
+   Shared UX system for all endpoint pages:
+     /book-a-call/  and future variants:
+     /lp/*  service-specific consultations
+     location consultation pages
+     industry consultation pages
+   Layered on top of global.css. No JS dependencies.
+   Load with: <link rel="stylesheet" href="/assets/css/endpoints.css">
+   ============================================================= */
+
+/* ---------- 1. ENDPOINT HERO ----------
+   Compact. Human. Trust-forward.
+   Pure focus — no ambient gradients competing with the action.
+   Two columns: text left, operator image right.
+   ------------------------------------------------------------ */
+
+.wfs-ep-hero {
+  padding-block: clamp(44px, 5.5vw, 80px) clamp(52px, 6vw, 96px);
+  background: var(--paper-mist);
+  border-bottom: 1px solid var(--line);
+}
+
+.wfs-ep-hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 42rem;
+}
+
+.wfs-ep-hero__heading {
+  margin-top: var(--sp-6);
+  text-wrap: balance;
+}
+
+.wfs-ep-hero__lede {
+  margin-top: var(--sp-5);
+  max-width: 40rem;
+}
+
+.wfs-ep-hero__cta {
+  margin-top: var(--sp-8);
+}
+
+/* Trust items — 4 inline signals below the CTA */
+
+.wfs-ep-hero__trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-5) clamp(var(--sp-7), 3.5vw, var(--sp-10));
+  margin-top: var(--sp-8);
+  padding-top: var(--sp-7);
+  border-top: 1px solid var(--line-fine);
+}
+
+.wfs-ep-hero__trust-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wfs-ep-hero__trust-item strong {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-md);
+  color: var(--ink-1);
+  letter-spacing: var(--tk-snug);
+  line-height: var(--lh-snug);
+}
+
+.wfs-ep-hero__trust-item span {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+}
+
+/* Operator image column */
+
+.wfs-ep-hero__figure {
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
+}
+
+.wfs-ep-hero__figure picture, .wfs-ep-hero__figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 991.98px) {
+  .wfs-ep-hero__content {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .wfs-ep-hero__figure {
+    max-width: 360px;
+    margin-top: var(--sp-10);
+  }
+}
+
+/* ---------- 2. ENDPOINT TL;DR STRIP ----------
+   4-item compact reassurance band.
+   Sits between hero and calendar.
+   ------------------------------------------------------------ */
+
+.wfs-ep-tldr {
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  padding-block: clamp(var(--sp-7), 2.5vw, var(--sp-10));
+}
+
+.wfs-ep-tldr__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.wfs-ep-tldr__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding-inline: clamp(var(--sp-5), 2vw, var(--sp-7));
+  border-right: 1px solid var(--line);
+}
+
+.wfs-ep-tldr__item:first-child {
+  padding-left: 0;
+}
+
+.wfs-ep-tldr__item:last-child {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.wfs-ep-tldr__label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tk-wide);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.wfs-ep-tldr__value {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--ink-1);
+  letter-spacing: var(--tk-snug);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+}
+
+@media (max-width: 767.98px) {
+  .wfs-ep-tldr__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .wfs-ep-tldr__item {
+    padding: var(--sp-5) var(--sp-5) var(--sp-5) 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .wfs-ep-tldr__item:nth-child(odd) {
+    border-right: 1px solid var(--line);
+    padding-right: var(--sp-5);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .wfs-ep-tldr__item:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 479.98px) {
+  .wfs-ep-tldr__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 479.98px) {
+  .wfs-ep-tldr__item {
+    border-right: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+@media (max-width: 479.98px) {
+  .wfs-ep-tldr__item:last-child {
+    border-bottom: 0;
+  }
+}
+
+/* ---------- 3. CALENDAR BLOCK ----------
+   The primary conversion action. Calendar takes the section.
+   Wrapped in a premium card. Phone alternative below.
+   ------------------------------------------------------------ */
+
+.wfs-ep-calendar {
+  background: var(--paper-warm);
+  border-top: 1px solid var(--line);
+}
+
+.wfs-ep-calendar__intro {
+  max-width: 44rem;
+  margin-bottom: clamp(var(--sp-8), 3vw, var(--sp-12));
+}
+
+.wfs-ep-calendar__intro p {
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  color: var(--ink-2);
+  margin-top: var(--sp-3);
+  text-wrap: pretty;
+}
+
+/* Calendar embed card */
+
+.wfs-ep-calendar__card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+/* Calendly inline widget — set height here */
+
+.wfs-ep-calendar__widget {
+  min-height: 680px;
+  width: 100%;
+}
+
+/* Phone / email alternative path */
+
+.wfs-ep-calendar__alt {
+  margin-top: var(--sp-8);
+  padding: var(--sp-6) var(--sp-7);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.wfs-ep-calendar__alt-label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tk-wide);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.wfs-ep-calendar__alt p {
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  color: var(--ink-2);
+}
+
+.wfs-ep-calendar__alt a {
+  color: var(--brand-deep);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--t-fast) var(--ease);
+}
+
+.wfs-ep-calendar__alt a:hover {
+  color: var(--brand);
+  text-decoration: underline;
+  text-decoration-color: var(--brand);
+  text-underline-offset: 3px;
+}
+
+/* ---------- 4. WHAT HAPPENS STEPS ----------
+   3-step horizontal process. Simpler than conv-process.
+   Shows what the call experience is — reduces uncertainty.
+   ------------------------------------------------------------ */
+
+.wfs-ep-steps {
+  position: relative;
+}
+
+.wfs-ep-steps__grid {
+  position: relative;
+}
+
+/* Connector line between step circles on desktop */
+
+@media (min-width: 992px) {
+  .wfs-ep-steps__grid::before {
+    content: "";
+    position: absolute;
+    top: 28px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: var(--line-strong);
+    z-index: 0;
+  }
+}
+
+.wfs-ep-steps__grid > [class*="col-"] {
+  display: flex;
+  position: relative;
+  z-index: 1;
+}
+
+.wfs-ep-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  width: 100%;
+  align-items: flex-start;
+}
+
+/* Step number circle — same radius as workflow/process */
+
+.wfs-ep-step__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--brand);
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.wfs-ep-step__num img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  display: block;
+}
+
+.wfs-ep-step__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.wfs-ep-step__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  letter-spacing: var(--tk-snug);
+  color: var(--ink-1);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+}
+
+.wfs-ep-step__body {
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+/* ---------- 5. QUALIFICATION BLOCK (for / not for) ----------
+   Single panel, two columns divided by a hairline.
+   Left: brand-tinted "for you if"
+   Right: neutral "probably not for you if"
+   Critical for premium lead quality.
+   ------------------------------------------------------------ */
+
+.wfs-ep-qualify__panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--line);
+  border-radius: var(--r-2xl);
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.wfs-ep-qualify__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  padding: clamp(var(--sp-8), 4vw, var(--sp-12));
+}
+
+.wfs-ep-qualify__col--for {
+  background: linear-gradient(160deg, var(--paper) 0%, var(--brand-tint) 100%);
+  border-right: 1px solid var(--line);
+}
+
+.wfs-ep-qualify__col--not {
+  background: var(--paper);
+}
+
+.wfs-ep-qualify__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding-bottom: var(--sp-5);
+  border-bottom: 1px solid var(--line);
+}
+
+.wfs-ep-qualify__eyebrow {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tk-wide);
+  text-transform: uppercase;
+}
+
+.wfs-ep-qualify__col--for .wfs-ep-qualify__eyebrow {
+  color: var(--brand);
+}
+
+.wfs-ep-qualify__col--not .wfs-ep-qualify__eyebrow {
+  color: var(--ink-3);
+}
+
+.wfs-ep-qualify__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  letter-spacing: var(--tk-snug);
+  color: var(--ink-1);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+}
+
+.wfs-ep-qualify__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.wfs-ep-qualify__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  line-height: var(--lh-body);
+  padding-left: var(--sp-5);
+  position: relative;
+}
+
+.wfs-ep-qualify__col--for .wfs-ep-qualify__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.56em;
+  width: 4px;
+  height: 4px;
+  background: var(--brand);
+  border-radius: var(--r-pill);
+  flex-shrink: 0;
+}
+
+.wfs-ep-qualify__col--not .wfs-ep-qualify__item {
+  color: var(--ink-3);
+}
+
+.wfs-ep-qualify__col--not .wfs-ep-qualify__item::before {
+  content: "\2013";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--ink-4);
+  line-height: 1.65;
+  font-size: var(--fs-sm);
+}
+
+.wfs-ep-qualify__note {
+  padding: var(--sp-5) var(--sp-6);
+  background: var(--paper-mist);
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  line-height: var(--lh-body);
+  font-style: italic;
+}
+
+@media (max-width: 767.98px) {
+  .wfs-ep-qualify__panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .wfs-ep-qualify__col--for {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+/* ---------- 6. PROOF MOMENTS ----------
+   3 compact inline testimonials. Not full review cards.
+   Editorial pull-quote style — anonymous, specific, human.
+   ------------------------------------------------------------ */
+
+.wfs-ep-proof__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-5);
+}
+
+.wfs-ep-proof__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  padding: var(--sp-7);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  transition: border-color var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
+}
+
+.wfs-ep-proof__item:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.wfs-ep-proof__quote {
+  font-size: var(--fs-md);
+  line-height: var(--lh-relaxed);
+  color: var(--ink-2);
+  font-style: italic;
+  flex-grow: 1;
+  text-wrap: pretty;
+}
+
+.wfs-ep-proof__byline {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--line);
+}
+
+.wfs-ep-proof__byline strong {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--ink-1);
+  letter-spacing: 0.005em;
+}
+
+.wfs-ep-proof__byline span {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}
+
+@media (max-width: 991.98px) {
+  .wfs-ep-proof__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .wfs-ep-proof__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- 7. REASSURANCE STRIP ----------
+   Final calm note before the page ends.
+   No CTA — the calendar higher on the page is the action.
+   This is closing trust, not closing pressure.
+   ------------------------------------------------------------ */
+
+.wfs-ep-reassurance {
+  padding-block: clamp(var(--sp-10), 4vw, var(--sp-16));
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+}
+
+.wfs-ep-reassurance__inner {
+  max-width: 52rem;
+  margin-inline: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.wfs-ep-reassurance__heading {
+  font-family: var(--font-display);
+  font-size: clamp(var(--fs-xl), 2vw, var(--fs-2xl));
+  font-weight: 500;
+  letter-spacing: var(--tk-snug);
+  color: var(--ink-1);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+}
+
+.wfs-ep-reassurance__body {
+  font-size: var(--fs-md);
+  line-height: var(--lh-relaxed);
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.wfs-ep-reassurance__contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--sp-5);
+  flex-wrap: wrap;
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--line-fine);
+}
+
+.wfs-ep-reassurance__contact a {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--brand-deep);
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--t-fast) var(--ease);
+}
+
+.wfs-ep-reassurance__contact a:hover {
+  text-decoration-color: var(--brand);
+}
+
+.wfs-ep-reassurance__contact span {
+  font-size: var(--fs-sm);
+  color: var(--ink-4);
+}
+

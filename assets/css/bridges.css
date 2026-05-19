@@ -1,0 +1,657 @@
+/* =============================================================
+   WestgateFS — Bridges  v1.0
+   Shared editorial UX system for all bridge-type pages:
+     Trust bridges:  /about/  /our-approach/  /our-team/
+                     /process/  /onboarding/  /methodology/
+                     /why-westgatefs/  /data-security/
+     Pain bridges:   /bookkeeping-problems/* (all spokes)
+     Qualify bridge: /who-we-work-with/  /who-we-are-not-a-fit-for/
+   Layered on top of global.css. No JS dependencies.
+   ============================================================= */
+
+/* ---------- 1. BRIDGE HERO ----------
+   Editorial, trust-forward. Text carries authority.
+   Cleaner and more generous than router or conversion heroes.
+   Supports optional figure column (add Bootstrap grid in HTML).
+   ------------------------------------------------------------ */
+
+.wfs-bridge-hero {
+  padding-block: clamp(56px, 7vw, 96px) clamp(64px, 7vw, 112px);
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.wfs-bridge-hero__content {
+  max-width: 48rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.wfs-bridge-hero__heading {
+  margin-top: var(--sp-6);
+  text-wrap: balance;
+}
+
+.wfs-bridge-hero__lede {
+  margin-top: var(--sp-5);
+}
+
+/* Inline trust signals — subtle, below lede, no rail weight */
+
+.wfs-bridge-hero__signals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3) var(--sp-7);
+  margin-top: var(--sp-8);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--line-fine);
+}
+
+.wfs-bridge-hero__signal {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  line-height: var(--lh-snug);
+}
+
+.wfs-bridge-hero__signal::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  background: var(--brand);
+  border-radius: var(--r-pill);
+  flex-shrink: 0;
+}
+
+/* Optional figure in bridge hero (for team/person pages) */
+
+.wfs-bridge-hero__figure {
+  width: 100%;
+  max-width: 380px;
+  margin-inline: auto;
+}
+
+.wfs-bridge-hero__figure picture, .wfs-bridge-hero__figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 991.98px) {
+  .wfs-bridge-hero__content {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .wfs-bridge-hero__figure {
+    margin-top: var(--sp-10);
+    max-width: 320px;
+  }
+}
+
+/* ---------- 2. BRIDGE NARRATIVE ----------
+   Editorial long-form prose block.
+   First paragraph gets a larger leading treatment.
+   Used on /about/, /our-approach/, /methodology/, pain pages.
+   ------------------------------------------------------------ */
+
+.wfs-bridge-narrative {
+  background: var(--paper);
+}
+
+.wfs-bridge-narrative__body {
+  max-width: 64ch;
+}
+
+/* First paragraph larger — editorial lead-in treatment */
+
+.wfs-bridge-narrative__body p:first-child {
+  font-size: clamp(1.0625rem, 0.6vw + 1rem, 1.1875rem);
+  line-height: var(--lh-relaxed);
+  color: var(--ink-2);
+}
+
+.wfs-bridge-narrative__body p + p {
+  margin-top: var(--sp-5);
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  color: var(--ink-2);
+}
+
+.wfs-bridge-narrative__body strong {
+  font-weight: 600;
+  color: var(--ink-1);
+}
+
+/* Highlighted statement — key principle or honest declaration */
+
+.wfs-bridge-narrative__highlight {
+  margin-top: var(--sp-8);
+  padding: var(--sp-7) var(--sp-8);
+  border-left: 3px solid var(--brand);
+  background: var(--paper-warm);
+  border-radius: 0 var(--r-lg) var(--r-lg) 0;
+}
+
+.wfs-bridge-narrative__highlight p {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  color: var(--ink-1);
+  letter-spacing: var(--tk-snug);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+  margin: 0;
+}
+
+/* Aside column — supplementary facts */
+
+.wfs-bridge-narrative__aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.wfs-bridge-narrative__aside-card {
+  padding: var(--sp-6) var(--sp-7);
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.wfs-bridge-narrative__aside-label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tk-wide);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.wfs-bridge-narrative__aside-value {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--ink-1);
+  letter-spacing: var(--tk-snug);
+  line-height: var(--lh-snug);
+}
+
+/* ---------- 3. OPERATOR PROFILE ----------
+   Founder / senior operator profile.
+   Image + editorial biography. Intimate, not promotional.
+   ------------------------------------------------------------ */
+
+.wfs-bridge-operator__figure {
+  width: 100%;
+  max-width: 400px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.wfs-bridge-operator__figure picture, .wfs-bridge-operator__figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-lg);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: var(--paper-warm);
+}
+
+.wfs-bridge-operator__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: var(--sp-2);
+}
+
+.wfs-bridge-operator__name {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--ink-1);
+  letter-spacing: var(--tk-snug);
+}
+
+.wfs-bridge-operator__role {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+}
+
+/* Story copy next to the image */
+
+.wfs-bridge-operator__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  max-width: 48rem;
+}
+
+.wfs-bridge-operator__copy p {
+  font-size: var(--fs-md);
+  line-height: var(--lh-relaxed);
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.wfs-bridge-operator__copy p + p {
+  margin-top: 0;
+}
+
+/* Operator voice — direct statement in first person */
+
+.wfs-bridge-operator__voice {
+  padding: var(--sp-6) var(--sp-7);
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  border-left: 3px solid var(--brand);
+}
+
+.wfs-bridge-operator__voice p {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  color: var(--ink-1);
+  letter-spacing: var(--tk-snug);
+  line-height: var(--lh-snug);
+  font-style: italic;
+  text-wrap: balance;
+  margin: 0;
+}
+
+@media (max-width: 991.98px) {
+  .wfs-bridge-operator__figure {
+    max-width: 340px;
+  }
+}
+
+/* ---------- 4. OPERATING PRINCIPLES ----------
+   4–5 numbered values/principles.
+   2×2 grid on desktop, single column on mobile.
+   Editorial — not process steps.
+   ------------------------------------------------------------ */
+
+.wfs-bridge-principles__grid > [class*="col-"] {
+  display: flex;
+}
+
+.wfs-bridge-principles__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  padding: var(--sp-8);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  width: 100%;
+  transition: border-color var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
+}
+
+.wfs-bridge-principles__item:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.wfs-bridge-principles__num {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--brand);
+  letter-spacing: var(--tk-wide);
+}
+
+.wfs-bridge-principles__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  letter-spacing: var(--tk-snug);
+  color: var(--ink-1);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+}
+
+.wfs-bridge-principles__body {
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  color: var(--ink-2);
+  flex-grow: 1;
+  text-wrap: pretty;
+}
+
+/* ---------- 5. STATS STRIP ----------
+   Key firm-level trust stats.
+   Horizontal on desktop, 2-column on tablet, stacked on mobile.
+   ------------------------------------------------------------ */
+
+.wfs-bridge-stats {
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding-block: clamp(var(--sp-8), 3vw, var(--sp-12));
+}
+
+.wfs-bridge-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.wfs-bridge-stats__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding-inline: clamp(var(--sp-5), 2.5vw, var(--sp-8));
+  border-right: 1px solid var(--line);
+}
+
+.wfs-bridge-stats__item:first-child {
+  padding-left: 0;
+}
+
+.wfs-bridge-stats__item:last-child {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.wfs-bridge-stats__value {
+  font-family: var(--font-display);
+  font-size: clamp(var(--fs-2xl), 3vw, var(--fs-4xl));
+  font-weight: 500;
+  color: var(--brand);
+  letter-spacing: var(--tk-tight);
+  line-height: 1;
+}
+
+.wfs-bridge-stats__label {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  line-height: var(--lh-body);
+  text-wrap: balance;
+}
+
+@media (max-width: 767.98px) {
+  .wfs-bridge-stats__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .wfs-bridge-stats__item {
+    padding: var(--sp-6) var(--sp-5) var(--sp-6) 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .wfs-bridge-stats__item:nth-child(odd) {
+    border-right: 1px solid var(--line);
+    padding-right: var(--sp-5);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .wfs-bridge-stats__item:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+}
+
+/* ---------- 6. BRIDGE NAVIGATION ----------
+   Internal routing grid. Links to deeper pages.
+   More editorial than service cards — less sales, more discovery.
+   ------------------------------------------------------------ */
+
+.wfs-bridge-nav__grid > [class*="col-"] {
+  display: flex;
+}
+
+.wfs-bridge-nav__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-7) var(--sp-7) var(--sp-6);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  width: 100%;
+  text-decoration: none;
+  transition: border-color var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease), transform var(--t-base) var(--ease-out);
+}
+
+.wfs-bridge-nav__card:hover {
+  border-color: var(--brand);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.wfs-bridge-nav__card:focus-visible {
+  outline: 0;
+  box-shadow: var(--focus-ring);
+}
+
+.wfs-bridge-nav__eyebrow {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tk-wide);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  transition: color var(--t-fast) var(--ease);
+}
+
+.wfs-bridge-nav__card:hover .wfs-bridge-nav__eyebrow {
+  color: var(--brand);
+}
+
+.wfs-bridge-nav__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  letter-spacing: var(--tk-snug);
+  color: var(--ink-1);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+}
+
+.wfs-bridge-nav__body {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  line-height: var(--lh-body);
+  flex-grow: 1;
+}
+
+.wfs-bridge-nav__link {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--brand);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  margin-top: var(--sp-2);
+  transition: color var(--t-fast) var(--ease);
+}
+
+.wfs-bridge-nav__card:hover .wfs-bridge-nav__link {
+  color: var(--brand-deep);
+}
+
+/* ---------- 7. BRIDGE PAIN (bookkeeping-problems pages) ----------
+   Pain intent rows. High urgency. Problem → solution structure.
+   Each row: tag + title (the problem) + body + link.
+   ------------------------------------------------------------ */
+
+.wfs-bridge-pain__header {
+  padding-block: clamp(var(--sp-6), 2vw, var(--sp-8));
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 0;
+}
+
+.wfs-bridge-pain__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.wfs-bridge-pain__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--sp-6);
+  align-items: flex-start;
+  padding: clamp(var(--sp-7), 3vw, var(--sp-10)) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.wfs-bridge-pain__row:last-child {
+  border-bottom: 0;
+}
+
+.wfs-bridge-pain__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.wfs-bridge-pain__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 500;
+  letter-spacing: var(--tk-snug);
+  color: var(--ink-1);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+}
+
+.wfs-bridge-pain__body {
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  color: var(--ink-2);
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+
+.wfs-bridge-pain__action {
+  flex-shrink: 0;
+  align-self: center;
+}
+
+@media (max-width: 767.98px) {
+  .wfs-bridge-pain__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .wfs-bridge-pain__action {
+    align-self: flex-start;
+  }
+}
+
+/* ---------- 8. BRIDGE QUALIFY (who-we-work-with pages) ----------
+   Lighter weight than endpoint qualify.
+   Simple two-list layout, not a panel.
+   ------------------------------------------------------------ */
+
+.wfs-bridge-qualify__grid > [class*="col-"] {
+  display: flex;
+}
+
+.wfs-bridge-qualify__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  padding: var(--sp-8);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  width: 100%;
+}
+
+.wfs-bridge-qualify__col--fit {
+  background: linear-gradient(160deg, var(--paper) 0%, var(--brand-tint) 100%);
+  border-color: var(--brand);
+}
+
+.wfs-bridge-qualify__col--not {
+  background: var(--paper);
+}
+
+.wfs-bridge-qualify__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding-bottom: var(--sp-5);
+  border-bottom: 1px solid var(--line);
+}
+
+.wfs-bridge-qualify__eyebrow {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tk-wide);
+  text-transform: uppercase;
+}
+
+.wfs-bridge-qualify__col--fit .wfs-bridge-qualify__eyebrow {
+  color: var(--brand);
+}
+
+.wfs-bridge-qualify__col--not .wfs-bridge-qualify__eyebrow {
+  color: var(--ink-3);
+}
+
+.wfs-bridge-qualify__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  letter-spacing: var(--tk-snug);
+  color: var(--ink-1);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+}
+
+.wfs-bridge-qualify__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.wfs-bridge-qualify__item {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  line-height: var(--lh-body);
+  padding-left: var(--sp-5);
+  position: relative;
+}
+
+.wfs-bridge-qualify__col--fit .wfs-bridge-qualify__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.56em;
+  width: 4px;
+  height: 4px;
+  background: var(--brand);
+  border-radius: var(--r-pill);
+}
+
+.wfs-bridge-qualify__col--not .wfs-bridge-qualify__item {
+  color: var(--ink-3);
+}
+
+.wfs-bridge-qualify__col--not .wfs-bridge-qualify__item::before {
+  content: "\2013";
+  position: absolute;
+  left: 0;
+  color: var(--ink-4);
+}
+

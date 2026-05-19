@@ -1,0 +1,1091 @@
+/* =============================================================
+   WestgateFS — Conversions  v2.0
+   Complete replacement. Ultra-premium UX.
+   Shared across all HARD EP pages:
+     /bookkeeping/cleanup/    /bookkeeping/catch-up/
+     /bookkeeping/reconciliations/  /quickbooks/cleanup/
+     /accounting/cleanup/     and all conversion spokes
+   Layered on top of global.css. No JS dependencies.
+   ============================================================= */
+
+/* ---------- 1. CONVERSION HERO ----------
+   Tighter than .wfs-router-hero.
+   Supports single-column and two-column (with figure) layout
+   via Bootstrap grid in HTML. No modifier class required.
+   ------------------------------------------------------------ */
+
+.wfs-conv-hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(40px, 5vw, 72px) clamp(48px, 5.5vw, 88px);
+  background: var(--paper-mist);
+  isolation: isolate;
+}
+
+.wfs-conv-hero::before, .wfs-conv-hero::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.wfs-conv-hero::before {
+  top: -20%;
+  right: -12%;
+  width: 55%;
+  height: 80%;
+  background: radial-gradient(circle at 68% 28%, rgba(197, 106, 46, 0.055), transparent 56%);
+}
+
+.wfs-conv-hero::after {
+  bottom: -20%;
+  left: -10%;
+  width: 50%;
+  height: 70%;
+  background: radial-gradient(circle at 32% 72%, rgba(60, 96, 136, 0.042), transparent 56%);
+}
+
+.wfs-conv-hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.wfs-conv-hero__heading {
+  margin-top: var(--sp-6);
+  text-wrap: balance;
+}
+
+.wfs-conv-hero__lede {
+  margin-top: var(--sp-5);
+  max-width: 42rem;
+}
+
+.wfs-conv-hero__cta {
+  margin-top: var(--sp-8);
+}
+
+/* Trust signals — inline horizontal strip under CTA */
+
+.wfs-conv-hero__trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-5) clamp(var(--sp-8), 4vw, var(--sp-12));
+  margin-top: var(--sp-8);
+  padding-top: var(--sp-7);
+  border-top: 1px solid var(--line-fine);
+}
+
+.wfs-conv-hero__trust-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wfs-conv-hero__trust-item strong {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-md);
+  color: var(--ink-1);
+  letter-spacing: var(--tk-snug);
+  line-height: var(--lh-snug);
+}
+
+.wfs-conv-hero__trust-item span {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  line-height: var(--lh-body);
+}
+
+/* Figure column — SVG or image illustration */
+
+.wfs-conv-hero__figure {
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+.wfs-conv-hero__figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 16px 40px rgba(26, 24, 20, 0.072)) drop-shadow(0 3px 8px rgba(26, 24, 20, 0.04));
+}
+
+@media (max-width: 991.98px) {
+  .wfs-conv-hero__figure {
+    max-width: 400px;
+    margin-top: var(--sp-10);
+  }
+}
+
+/* ---------- 2. TL;DR STRIP (direct-answer band) ----------
+   Immediately after hero. Four quick-answer items in a row.
+   AI extraction target. Featured snippet candidate. Mobile scannable.
+   ------------------------------------------------------------ */
+
+.wfs-conv-tldr {
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  padding-block: clamp(var(--sp-7), 2.5vw, var(--sp-10));
+}
+
+.wfs-conv-tldr__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.wfs-conv-tldr__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding-inline: clamp(var(--sp-5), 2vw, var(--sp-7));
+  border-right: 1px solid var(--line);
+}
+
+.wfs-conv-tldr__item:first-child {
+  padding-left: 0;
+}
+
+.wfs-conv-tldr__item:last-child {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.wfs-conv-tldr__q {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tk-wide);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.wfs-conv-tldr__a {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--ink-1);
+  letter-spacing: var(--tk-snug);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+}
+
+@media (max-width: 767.98px) {
+  .wfs-conv-tldr__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .wfs-conv-tldr__item {
+    padding: var(--sp-5) var(--sp-5) var(--sp-5) 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .wfs-conv-tldr__item:nth-child(odd) {
+    border-right: 1px solid var(--line);
+    padding-right: var(--sp-5);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .wfs-conv-tldr__item:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 479.98px) {
+  .wfs-conv-tldr__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 479.98px) {
+  .wfs-conv-tldr__item {
+    border-right: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+@media (max-width: 479.98px) {
+  .wfs-conv-tldr__item:last-child {
+    border-bottom: 0;
+  }
+}
+
+/* ---------- 3. CONVERSION INTRO (direct answer block) ----------
+   Two columns: long answer left, highlight card right.
+   Tighter vertical padding than full .wfs-section.
+   ------------------------------------------------------------ */
+
+.wfs-conv-intro {
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  padding-block: var(--section-py-sm);
+}
+
+.wfs-conv-intro__answer {
+  font-size: clamp(1.0625rem, 0.5vw + 1rem, 1.125rem);
+  line-height: var(--lh-relaxed);
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.wfs-conv-intro__answer strong {
+  color: var(--ink-1);
+  font-weight: 600;
+}
+
+.wfs-conv-intro__answer p + p {
+  margin-top: var(--sp-5);
+}
+
+/* Right-column highlight card */
+
+.wfs-conv-intro__card {
+  padding: var(--sp-8);
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  border-left: 3px solid var(--brand);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  height: 100%;
+}
+
+.wfs-conv-intro__card-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--ink-1);
+  letter-spacing: var(--tk-snug);
+  padding-bottom: var(--sp-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.wfs-conv-intro__facts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.wfs-conv-intro__fact {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.wfs-conv-intro__fact dt {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--ink-1);
+  letter-spacing: 0.005em;
+}
+
+.wfs-conv-intro__fact dd {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  line-height: var(--lh-body);
+}
+
+/* ---------- 4. SCOPE (what's included) ----------
+   Left: included groups. Right: exclusions + nudge.
+   ------------------------------------------------------------ */
+
+.wfs-conv-scope__block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+.wfs-conv-scope__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.wfs-conv-scope__group-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-md);
+  color: var(--ink-1);
+  letter-spacing: var(--tk-snug);
+  padding-bottom: var(--sp-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.wfs-conv-scope__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.wfs-conv-scope__item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-left: var(--sp-6);
+  position: relative;
+}
+
+.wfs-conv-scope__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 12px;
+  height: 1px;
+  background: var(--brand);
+}
+
+.wfs-conv-scope__item strong {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--ink-1);
+  letter-spacing: 0.005em;
+}
+
+.wfs-conv-scope__item span {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  line-height: var(--lh-body);
+}
+
+.wfs-conv-scope__aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+.wfs-conv-scope__exclusions {
+  padding: var(--sp-7);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.wfs-conv-scope__exclusions-title {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tk-wide);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.wfs-conv-scope__exclusions ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.wfs-conv-scope__exclusions li {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  line-height: var(--lh-body);
+  padding-left: var(--sp-5);
+  position: relative;
+}
+
+.wfs-conv-scope__exclusions li::before {
+  content: "\2013";
+  position: absolute;
+  left: 0;
+  color: var(--ink-4);
+}
+
+.wfs-conv-scope__exclusions p {
+  font-size: var(--fs-xs);
+  color: var(--ink-4);
+  line-height: var(--lh-body);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--line-fine);
+  font-style: italic;
+}
+
+/* ---------- 5. INLINE NUDGE ----------
+   Mid-page CTA. Placed within a section, not a section itself.
+   Appears after scope, can be reused anywhere.
+   ------------------------------------------------------------ */
+
+.wfs-conv-nudge {
+  padding: var(--sp-7) var(--sp-8);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  flex-wrap: wrap;
+  margin-top: var(--sp-12);
+  transition: border-color var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
+}
+
+.wfs-conv-nudge:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.wfs-conv-nudge__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.wfs-conv-nudge__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  color: var(--ink-1);
+  letter-spacing: var(--tk-snug);
+}
+
+.wfs-conv-nudge__sub {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+}
+
+@media (max-width: 767.98px) {
+  .wfs-conv-nudge {
+    padding: var(--sp-6);
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ---------- 6. CLARIFIER (cleanup vs catch-up decision) ----------
+   Two equal cards. Active = this page's service (highlighted).
+   ------------------------------------------------------------ */
+
+.wfs-conv-clarifier__grid > [class*="col-"] {
+  display: flex;
+}
+
+.wfs-conv-clarifier__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  padding: var(--sp-8);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  width: 100%;
+  transition: border-color var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease), transform var(--t-base) var(--ease-out);
+}
+
+.wfs-conv-clarifier__card:hover {
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.wfs-conv-clarifier__card--active {
+  border-color: var(--brand);
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(160deg, var(--paper) 0%, var(--brand-tint) 100%);
+}
+
+.wfs-conv-clarifier__card--active:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.wfs-conv-clarifier__label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tk-wide);
+  text-transform: uppercase;
+}
+
+.wfs-conv-clarifier__card--active .wfs-conv-clarifier__label {
+  color: var(--brand);
+}
+
+.wfs-conv-clarifier__card:not(.wfs-conv-clarifier__card--active) .wfs-conv-clarifier__label {
+  color: var(--ink-3);
+}
+
+.wfs-conv-clarifier__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 500;
+  letter-spacing: var(--tk-snug);
+  color: var(--ink-1);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+}
+
+.wfs-conv-clarifier__signal {
+  font-size: var(--fs-md);
+  color: var(--ink-3);
+  font-style: italic;
+  line-height: var(--lh-body);
+}
+
+.wfs-conv-clarifier__signals {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  border-top: 1px solid var(--line);
+  padding-top: var(--sp-5);
+  margin-top: var(--sp-2);
+}
+
+.wfs-conv-clarifier__signals li {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  line-height: var(--lh-body);
+  padding-left: var(--sp-5);
+  position: relative;
+}
+
+.wfs-conv-clarifier__signals li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.56em;
+  width: 4px;
+  height: 4px;
+  background: var(--brand);
+  border-radius: var(--r-pill);
+}
+
+.wfs-conv-clarifier__note {
+  margin-top: var(--sp-8);
+  padding: var(--sp-6) var(--sp-8);
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.wfs-conv-clarifier__note strong {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-md);
+  color: var(--ink-1);
+  letter-spacing: var(--tk-snug);
+}
+
+.wfs-conv-clarifier__note p {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  line-height: var(--lh-body);
+}
+
+/* ---------- 7. CONVERSION PROCESS (numbered, vertical, detailed) ----------
+   More detail per step than .wfs-workflow.
+   Step num supports text fallback or image (step-0X.png).
+   JS may apply scroll-reveal by setting opacity/transform on steps.
+   ------------------------------------------------------------ */
+
+.wfs-conv-process__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.wfs-conv-process__step {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: var(--sp-7);
+  align-items: flex-start;
+  padding-block: var(--sp-8);
+  border-bottom: 1px solid var(--line);
+}
+
+.wfs-conv-process__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  color: var(--brand);
+  font-weight: 500;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.wfs-conv-process__num img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  display: block;
+}
+
+.wfs-conv-process__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding-top: var(--sp-2);
+}
+
+.wfs-conv-process__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  letter-spacing: var(--tk-snug);
+  color: var(--ink-1);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+}
+
+.wfs-conv-process__body {
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  color: var(--ink-2);
+  max-width: 58ch;
+  text-wrap: pretty;
+}
+
+.wfs-conv-process__detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.wfs-conv-process__detail li {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  line-height: var(--lh-body);
+  padding-left: var(--sp-5);
+  position: relative;
+}
+
+.wfs-conv-process__detail li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 10px;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+@media (max-width: 575.98px) {
+  .wfs-conv-process__step {
+    grid-template-columns: 44px 1fr;
+    gap: var(--sp-4);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .wfs-conv-process__num {
+    width: 44px;
+    height: 44px;
+    font-size: var(--fs-xs);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .wfs-conv-process__num img {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* ---------- 8. PRICING SIGNALS ----------
+   Honest cost-factor list. Never publishes flat rates.
+   Intro col is sticky on desktop for reading comfort.
+   ------------------------------------------------------------ */
+
+.wfs-conv-pricing__inner {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(var(--sp-10), 5vw, var(--sp-18));
+  align-items: flex-start;
+}
+
+.wfs-conv-pricing__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  position: sticky;
+  top: calc(var(--header-h) + var(--sp-8));
+}
+
+.wfs-conv-pricing__intro p {
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.wfs-conv-pricing__factors {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.wfs-conv-pricing__factor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  padding: var(--sp-6) var(--sp-7);
+  border-bottom: 1px solid var(--line);
+  transition: background-color var(--t-base) var(--ease);
+}
+
+.wfs-conv-pricing__factor:last-child {
+  border-bottom: 0;
+}
+
+.wfs-conv-pricing__factor:hover {
+  background: var(--paper-mist);
+}
+
+.wfs-conv-pricing__factor strong {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-md);
+  color: var(--ink-1);
+  letter-spacing: var(--tk-snug);
+}
+
+.wfs-conv-pricing__factor span {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  line-height: var(--lh-body);
+}
+
+.wfs-conv-pricing__note {
+  grid-column: 1 / -1;
+  padding: var(--sp-6) var(--sp-7);
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  line-height: var(--lh-body);
+}
+
+.wfs-conv-pricing__note strong {
+  color: var(--ink-1);
+  font-weight: 600;
+}
+
+.wfs-conv-pricing__note a {
+  color: var(--brand-deep);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--t-fast) var(--ease);
+}
+
+.wfs-conv-pricing__note a:hover {
+  text-decoration-color: var(--brand);
+}
+
+@media (max-width: 991.98px) {
+  .wfs-conv-pricing__inner {
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .wfs-conv-pricing__intro {
+    position: static;
+  }
+}
+
+/* ---------- 9. BEFORE / AFTER (TRANSFORM) ----------
+   Before col: muted. After col: branded.
+   Emotionally paced — muted state first, clean state second.
+   ------------------------------------------------------------ */
+
+.wfs-conv-transform__grid > [class*="col-"] {
+  display: flex;
+}
+
+.wfs-conv-transform__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  padding: var(--sp-8);
+  border-radius: var(--r-xl);
+  width: 100%;
+}
+
+.wfs-conv-transform__col--before {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  opacity: 0.88;
+}
+
+.wfs-conv-transform__col--after {
+  background: linear-gradient(160deg, var(--paper) 0%, var(--brand-tint) 100%);
+  border: 1px solid var(--brand);
+  box-shadow: var(--shadow-md);
+}
+
+.wfs-conv-transform__label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tk-wide);
+  text-transform: uppercase;
+}
+
+.wfs-conv-transform__col--before .wfs-conv-transform__label {
+  color: var(--ink-4);
+}
+
+.wfs-conv-transform__col--after .wfs-conv-transform__label {
+  color: var(--brand);
+}
+
+.wfs-conv-transform__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  letter-spacing: var(--tk-snug);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+}
+
+.wfs-conv-transform__col--before .wfs-conv-transform__title {
+  color: var(--ink-3);
+}
+
+.wfs-conv-transform__col--after .wfs-conv-transform__title {
+  color: var(--ink-1);
+}
+
+.wfs-conv-transform__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.wfs-conv-transform__list li {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-body);
+  padding-left: var(--sp-6);
+  position: relative;
+}
+
+.wfs-conv-transform__col--before .wfs-conv-transform__list li {
+  color: var(--ink-3);
+}
+
+.wfs-conv-transform__col--before .wfs-conv-transform__list li::before {
+  content: "\00D7";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--ink-4);
+  font-size: 0.8em;
+  line-height: 1.65;
+}
+
+.wfs-conv-transform__col--after .wfs-conv-transform__list li {
+  color: var(--ink-2);
+}
+
+.wfs-conv-transform__col--after .wfs-conv-transform__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 12px;
+  height: 1px;
+  background: var(--brand);
+}
+
+.wfs-conv-transform__meta {
+  margin-top: var(--sp-2);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--line-fine);
+  font-size: var(--fs-xs);
+  color: var(--ink-4);
+  font-style: italic;
+  line-height: var(--lh-body);
+}
+
+/* ---------- 10. FEATURED PROOF (single prominent case study) ----------
+   One deep case study — not 3 small cards.
+   Supports optional editorial image at top via .wfs-conv-proof__figure.
+   ------------------------------------------------------------ */
+
+.wfs-conv-proof__card {
+  padding: clamp(var(--sp-8), 4vw, var(--sp-14));
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(var(--sp-7), 3vw, var(--sp-10));
+  overflow: hidden;
+}
+
+/* Full-bleed editorial image at top of card */
+
+.wfs-conv-proof__figure {
+  width: calc(100% + clamp(var(--sp-8), 4vw, var(--sp-14)) * 2);
+  margin-inline: calc(clamp(var(--sp-8), 4vw, var(--sp-14)) * -1);
+  margin-top: calc(clamp(var(--sp-8), 4vw, var(--sp-14)) * -1);
+  aspect-ratio: 21 / 8;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.wfs-conv-proof__figure picture, .wfs-conv-proof__figure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Two-column body + detail grid */
+
+.wfs-conv-proof__content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(var(--sp-8), 4vw, var(--sp-14));
+  align-items: flex-start;
+}
+
+.wfs-conv-proof__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.wfs-conv-proof__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+
+.wfs-conv-proof__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: 500;
+  letter-spacing: var(--tk-snug);
+  color: var(--ink-1);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+}
+
+.wfs-conv-proof__description {
+  font-size: var(--fs-md);
+  line-height: var(--lh-relaxed);
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.wfs-conv-proof__detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-7);
+}
+
+.wfs-conv-proof__engagement {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.wfs-conv-proof__stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  padding: var(--sp-5) var(--sp-6);
+  border-bottom: 1px solid var(--line);
+}
+
+.wfs-conv-proof__stat:last-child {
+  border-bottom: 0;
+}
+
+.wfs-conv-proof__stat-label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tk-wide);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.wfs-conv-proof__stat-value {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 500;
+  letter-spacing: var(--tk-snug);
+  color: var(--ink-1);
+  line-height: var(--lh-snug);
+}
+
+.wfs-conv-proof__outcome {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-6);
+  background: linear-gradient(160deg, var(--paper) 0%, var(--brand-tint) 100%);
+  border: 1px solid var(--brand);
+  border-radius: var(--r-lg);
+}
+
+.wfs-conv-proof__outcome-label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tk-wide);
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.wfs-conv-proof__outcome-text {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  color: var(--ink-1);
+  letter-spacing: var(--tk-snug);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+}
+
+@media (max-width: 991.98px) {
+  .wfs-conv-proof__content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .wfs-conv-proof__figure {
+    aspect-ratio: 16 / 7;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .wfs-conv-proof__figure {
+    aspect-ratio: 4 / 3;
+  }
+}
+

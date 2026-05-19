@@ -1,0 +1,597 @@
+/* =============================================================
+   WestgateFS — Locations  v1.0
+   Shared local SEO system for all location pages:
+     Hub:    /locations/
+     State:  /locations/texas/
+     Cities: /locations/texas/houston/  /dallas/  /austin/
+             /san-antonio/  /conroe/  and all city pages
+   Layered on top of global.css. No JS dependencies.
+   FAQ accordion: load conversion.js (class-based, works anywhere).
+   ============================================================= */
+
+/* ---------- 1. LOCATION HERO ----------
+   Locally grounded. Keyword-rich. Premium feel.
+   Immediately answers: who, what, where.
+   NAP and trust signals above the fold on desktop.
+   ------------------------------------------------------------ */
+
+.wfs-loc-hero {
+  padding-block: clamp(48px, 5.5vw, 80px) clamp(52px, 6vw, 88px);
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.wfs-loc-hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 50rem;
+}
+
+/* Location badge — city/state prominent in eyebrow */
+
+.wfs-loc-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-5);
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tk-wide);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  width: fit-content;
+  margin-bottom: var(--sp-5);
+}
+
+.wfs-loc-hero__badge::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: var(--brand);
+  border-radius: var(--r-pill);
+  flex-shrink: 0;
+}
+
+.wfs-loc-hero__heading {
+  text-wrap: balance;
+}
+
+.wfs-loc-hero__lede {
+  margin-top: var(--sp-5);
+  max-width: 46rem;
+}
+
+/* Local trust signals — fast-scan signals below lede */
+
+.wfs-loc-hero__signals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3) var(--sp-6);
+  margin-top: var(--sp-7);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--line-fine);
+}
+
+.wfs-loc-hero__signal {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  line-height: 1;
+}
+
+.wfs-loc-hero__signal::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  background: var(--brand);
+  border-radius: var(--r-pill);
+  flex-shrink: 0;
+}
+
+.wfs-loc-hero__signal strong {
+  color: var(--ink-2);
+  font-weight: 600;
+}
+
+/* ---------- 2. NAP BLOCK ----------
+   Name, Address, Phone. The local SEO anchor.
+   <address> element. Schema-ready classes.
+   Business-card visual — clean, prominent, non-intrusive.
+   ------------------------------------------------------------ */
+
+.wfs-loc-nap {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  padding: var(--sp-7) var(--sp-8);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.wfs-loc-nap__name {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 500;
+  color: var(--ink-1);
+  letter-spacing: var(--tk-snug);
+  line-height: var(--lh-snug);
+}
+
+.wfs-loc-nap__service-area {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.wfs-loc-nap__base {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  font-weight: 500;
+}
+
+.wfs-loc-nap__area {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+}
+
+.wfs-loc-nap__contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--line-fine);
+}
+
+.wfs-loc-nap__contact a {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--brand-deep);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  transition: color var(--t-fast) var(--ease);
+}
+
+.wfs-loc-nap__contact a:hover {
+  color: var(--brand);
+}
+
+.wfs-loc-nap__hours {
+  font-size: var(--fs-xs);
+  color: var(--ink-4);
+  margin-top: var(--sp-1);
+}
+
+/* Rating badge inside NAP */
+
+.wfs-loc-nap__rating {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--paper-warm);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line-fine);
+  width: fit-content;
+}
+
+.wfs-loc-nap__rating-score {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  color: var(--brand);
+  letter-spacing: var(--tk-snug);
+  line-height: 1;
+}
+
+.wfs-loc-nap__rating-stars {
+  font-size: var(--fs-sm);
+  color: var(--brand);
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.wfs-loc-nap__rating-label {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  line-height: var(--lh-body);
+}
+
+/* ---------- 3. LOCAL SIGNALS STRIP ----------
+   Horizontal trust band directly under hero.
+   Google rating · Years · Certification · Scope · Service area.
+   ------------------------------------------------------------ */
+
+.wfs-loc-signals {
+  background: var(--paper-warm);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding-block: clamp(var(--sp-5), 2vw, var(--sp-8));
+}
+
+.wfs-loc-signals__grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) 0;
+}
+
+.wfs-loc-signals__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  padding-inline: clamp(var(--sp-5), 2.5vw, var(--sp-8));
+  border-right: 1px solid var(--line);
+}
+
+.wfs-loc-signals__item:first-child {
+  padding-left: 0;
+}
+
+.wfs-loc-signals__item:last-child {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.wfs-loc-signals__value {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--ink-1);
+  letter-spacing: var(--tk-snug);
+  line-height: var(--lh-snug);
+  white-space: nowrap;
+}
+
+.wfs-loc-signals__label {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+@media (max-width: 767.98px) {
+  .wfs-loc-signals__grid {
+    gap: var(--sp-4) 0;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .wfs-loc-signals__item {
+    padding-inline: var(--sp-5);
+    border-right: 0;
+    border-bottom: 1px solid var(--line-fine);
+    padding-bottom: var(--sp-4);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .wfs-loc-signals__item:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+/* ---------- 4. LOCATION SERVICES ----------
+   "Services available in [City]" section.
+   Grid of service links with city-specific descriptions.
+   ------------------------------------------------------------ */
+
+.wfs-loc-services__grid > [class*="col-"] {
+  display: flex;
+}
+
+.wfs-loc-service-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-7);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  text-decoration: none;
+  width: 100%;
+  transition: border-color var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease), transform var(--t-base) var(--ease-out);
+}
+
+.wfs-loc-service-card:hover {
+  border-color: var(--brand);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.wfs-loc-service-card:focus-visible {
+  outline: 0;
+  box-shadow: var(--focus-ring);
+}
+
+.wfs-loc-service-card__label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tk-wide);
+  text-transform: uppercase;
+  color: var(--ink-4);
+  transition: color var(--t-fast) var(--ease);
+}
+
+.wfs-loc-service-card:hover .wfs-loc-service-card__label {
+  color: var(--brand);
+}
+
+.wfs-loc-service-card__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  letter-spacing: var(--tk-snug);
+  color: var(--ink-1);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+}
+
+.wfs-loc-service-card__body {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  line-height: var(--lh-body);
+  flex-grow: 1;
+  text-wrap: pretty;
+}
+
+.wfs-loc-service-card__link {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--brand);
+  margin-top: var(--sp-2);
+}
+
+/* ---------- 5. INDUSTRY VERTICALS ----------
+   Local industry context. "We understand [city]'s industries."
+   Compact 3-col grid. Not full service cards — contextual notes.
+   ------------------------------------------------------------ */
+
+.wfs-loc-industries__grid > [class*="col-"] {
+  display: flex;
+}
+
+.wfs-loc-industry {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-6) var(--sp-7);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  width: 100%;
+  transition: border-color var(--t-base) var(--ease);
+}
+
+.wfs-loc-industry:hover {
+  border-color: var(--line-strong);
+}
+
+.wfs-loc-industry__name {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  letter-spacing: var(--tk-snug);
+  color: var(--ink-1);
+  line-height: var(--lh-snug);
+}
+
+.wfs-loc-industry__note {
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+  line-height: var(--lh-body);
+  flex-grow: 1;
+  text-wrap: pretty;
+}
+
+/* ---------- 6. LOCAL PROOF ----------
+   Testimonials attributed to specific city/area.
+   Location attribution visible — reinforces local trust.
+   ------------------------------------------------------------ */
+
+.wfs-loc-proof__grid > [class*="col-"] {
+  display: flex;
+}
+
+.wfs-loc-proof-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  padding: var(--sp-7) var(--sp-8);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  width: 100%;
+  transition: border-color var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
+}
+
+.wfs-loc-proof-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.wfs-loc-proof-card__quote {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  font-style: italic;
+  color: var(--ink-1);
+  letter-spacing: var(--tk-snug);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+  flex-grow: 1;
+}
+
+.wfs-loc-proof-card__byline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--line);
+}
+
+.wfs-loc-proof-card__who {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--ink-1);
+}
+
+/* Location attribution — visually distinct */
+
+.wfs-loc-proof-card__where {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-xs);
+  color: var(--brand);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.wfs-loc-proof-card__where::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  background: var(--brand);
+  border-radius: var(--r-pill);
+  flex-shrink: 0;
+}
+
+.wfs-loc-proof-card__service {
+  font-size: var(--fs-xs);
+  color: var(--ink-4);
+}
+
+/* ---------- 7. SERVICE COVERAGE AREA ----------
+   Nearby cities and areas served.
+   Prose intro + city chip cloud.
+   Dense local keyword coverage for crawlers.
+   ------------------------------------------------------------ */
+
+.wfs-loc-coverage__body {
+  font-size: var(--fs-md);
+  line-height: var(--lh-relaxed);
+  color: var(--ink-2);
+  max-width: 58ch;
+  text-wrap: pretty;
+  margin-bottom: var(--sp-8);
+}
+
+.wfs-loc-coverage__body strong {
+  color: var(--ink-1);
+  font-weight: 600;
+}
+
+.wfs-loc-coverage__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.wfs-loc-coverage__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp-2) var(--sp-5);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  font-weight: 500;
+  transition: border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+
+.wfs-loc-coverage__chip:hover {
+  border-color: var(--brand);
+  color: var(--ink-1);
+}
+
+/* County grouping label */
+
+.wfs-loc-coverage__county {
+  width: 100%;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--tk-wide);
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-top: var(--sp-5);
+  margin-bottom: var(--sp-2);
+}
+
+.wfs-loc-coverage__county:first-child {
+  margin-top: 0;
+}
+
+/* ---------- 8. LOCATION ROUTING ----------
+   Links to other city/state pages.
+   Compact grid. Hub and spoke navigation.
+   ------------------------------------------------------------ */
+
+.wfs-loc-routing__grid > [class*="col-"] {
+  display: flex;
+}
+
+.wfs-loc-routing-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-5) var(--sp-6);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  text-decoration: none;
+  width: 100%;
+  transition: border-color var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
+}
+
+.wfs-loc-routing-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+}
+
+.wfs-loc-routing-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.wfs-loc-routing-card__city {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  letter-spacing: var(--tk-snug);
+  color: var(--ink-1);
+  line-height: var(--lh-snug);
+}
+
+.wfs-loc-routing-card__region {
+  font-size: var(--fs-xs);
+  color: var(--ink-4);
+}
+
+.wfs-loc-routing-card__arrow {
+  font-size: var(--fs-md);
+  color: var(--ink-4);
+  transition: color var(--t-fast) var(--ease), transform var(--t-fast) var(--ease-out);
+  flex-shrink: 0;
+}
+
+.wfs-loc-routing-card:hover .wfs-loc-routing-card__arrow {
+  color: var(--brand);
+  transform: translateX(3px);
+}
+

@@ -1,0 +1,77 @@
+<svg width="600" height="600" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="600" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#005A63"/>
+      <stop offset="100%" stop-color="#002D33"/>
+    </linearGradient>
+
+    <linearGradient id="darkOverlay" x1="0" y1="0" x2="600" y2="600">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.28"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Outer Shield -->
+  <path d="M60 75L300 20L540 75V430L300 580L60 430V75Z"
+        fill="#032B31"
+        filter="url(#shadow)"/>
+
+  <!-- Inner Shield -->
+  <path d="M80 90L300 42L520 90V420L300 555L80 420V90Z"
+        fill="url(#bg)"
+        stroke="#D99200"
+        stroke-width="6"/>
+
+  <!-- Diagonal Overlay -->
+  <path d="M80 420L520 90V420L300 555L80 420Z"
+        fill="url(#darkOverlay)"/>
+
+  <!-- Gold Bar -->
+  <rect x="55" y="205" width="490" height="125" rx="2" fill="#F2DA6B"/>
+  <polygon points="55,205 300,205 210,330 55,330"
+           fill="#FFF1AE"
+           opacity="0.55"/>
+
+  <!-- INTUIT -->
+  <text x="300" y="145"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="44"
+        font-weight="700"
+        letter-spacing="2"
+        fill="white"
+        text-anchor="middle">
+    INTUIT
+  </text>
+
+  <!-- ProAdvisor -->
+  <text x="300" y="198"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="38"
+        font-weight="400"
+        fill="white"
+        text-anchor="middle">
+    ProAdvisor
+  </text>
+
+  <!-- GOLD -->
+  <text x="300" y="285"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="62"
+        font-weight="700"
+        fill="black"
+        letter-spacing="2"
+        text-anchor="middle">
+    GOLD
+  </text>
+
+  <!-- Bottom Stars -->
+  <polygon points="275,390 283,412 307,412 288,426 295,448 275,434 255,448 262,426 243,412 267,412"
+           fill="#007A84"/>
+
+  <polygon points="325,390 333,412 357,412 338,426 345,448 325,434 305,448 312,426 293,412 317,412"
+           fill="#007A84"/>
+</svg>
